@@ -1,6 +1,7 @@
 // config/express.js
 var express = require('express');
 var load = require('express-load');
+var bodyParser = require('body-parser');
 
 
 module.exports = function() {
@@ -11,6 +12,9 @@ module.exports = function() {
 
 // middleware
     app.use(express.static('./public'));
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(bodyParser.json());
+    app.use(require('method-override')());
     app.set('view engine', 'ejs');
     app.set('views','./app/views');
 
